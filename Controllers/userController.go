@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Create user in database
 func UserCreate(c *gin.Context) {
 	var user Model.User
-	c.BindJSON(&user)
-
+	c.BindJSON(&user) // Getting json data from api and compare data with model
 	if err := Config.DB.Create(user).Error; err != nil {
 		c.JSON(404, err.Error())
 	} else {
@@ -18,6 +18,7 @@ func UserCreate(c *gin.Context) {
 	}
 }
 
+// Get all users from the database
 func GetAllUsers(c *gin.Context) {
 	var users []Model.User
 	if err := Config.DB.Find(&users).Error; err != nil {
@@ -27,6 +28,7 @@ func GetAllUsers(c *gin.Context) {
 	}
 }
 
+// Get one user with name
 func GetOneUser(c *gin.Context) {
 	var user Model.User
 	name := c.Params.ByName("name")
@@ -37,6 +39,7 @@ func GetOneUser(c *gin.Context) {
 	}
 }
 
+// Update user with name
 func UpdateUser(c *gin.Context) {
 	var user Model.User
 	c.BindJSON(&user)
@@ -48,6 +51,7 @@ func UpdateUser(c *gin.Context) {
 	}
 }
 
+// Delete user with name
 func DeleteUser(c *gin.Context) {
 	var user Model.User
 	c.BindJSON(&user)

@@ -9,11 +9,15 @@ import (
 
 func init() {
 	Config.LoadEnv()
+	// Getting port 3000 form env file and for slect other things os.Getenv(key)
 	Config.DbConnection()
+	// Database connection
 }
 
 func main() {
-	r := gin.Default()
-	Routers.User(r)
-	r.Run()
+	r := gin.Default() //Create server
+
+	Routers.User(r) // Pass routing in user routes
+
+	r.Run() // run server
 }
